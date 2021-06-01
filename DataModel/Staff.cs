@@ -4,13 +4,25 @@ using System.Text;
 
 namespace WpfApp1.DataModel
 {
-    interface Staff
+    abstract class Staff 
     {
-        private static uint id = 0;
-        public uint ID { get; set; }
-        public int Age { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public int Salary { get; set; }
+        protected static uint id;
+        public uint ID { get ; set ; }
+        public uint Age { get ; set ; }
+        public string FirstName { get ; set ; }
+        public string LastName { get ; set ; }
+        public Deportament Deportament { get ; set ; }
+        abstract public double Salary { get; }
+
+        virtual public string GetName()
+        { return String.Format("{0} : {1} {2}", ID, FirstName, LastName); } //Для отображения имени
+
+
+        public Staff(Deportament deportament)
+        {
+            Deportament = deportament;
+        }
+
+
     }
 }
