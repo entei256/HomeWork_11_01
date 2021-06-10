@@ -6,8 +6,8 @@ namespace WpfApp1.DataModel
 {
     abstract class Staff 
     {
-        protected static uint id;
-        public uint ID { get ; set ; }
+        protected static ulong id;
+        public ulong ID { get ; set ; }
         public uint Age { get ; set ; }
         public string FirstName { get ; set ; }
         public string LastName { get ; set ; }
@@ -20,6 +20,7 @@ namespace WpfApp1.DataModel
 
         public Staff(Deportament deportament)
         {
+            ID = ++id;
             Deportament = deportament;
         }
 

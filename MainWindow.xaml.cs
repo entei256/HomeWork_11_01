@@ -24,7 +24,6 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-            Staff s = new Personal()
         }
     }
 }

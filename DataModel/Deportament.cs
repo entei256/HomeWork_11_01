@@ -8,8 +8,8 @@ namespace WpfApp1.DataModel
 {
     class Deportament
     {
-        private static uint id;            //Счетчик ID
-        public uint ID { get; set; }
+        private static ulong id;            //Счетчик ID
+        public ulong ID { get; set; }
         public DateTime DateTime { get; set; }
         public string Name { get; set; }
         public ObservableCollection<Deportament> Deportaments { get; set; }      //Коллекция дочерних депортаментов. 
