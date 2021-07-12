@@ -14,19 +14,30 @@ namespace WpfApp1
         public VM()
         {
             testData(Deportaments);
-            //MessageBox.Show("Load Complite!");
         }
 
         private void testData(ObservableCollection<DataModel.Deportament> deportaments)
         {
-            var run = new Random().Next(1, 10);
-            for (int i = 0; i <= run;i++)
+            var ran = new Random().Next(1, 10);
+            for (int i = 0; i <= ran;i++)
             {
                 deportaments.Add(new DataModel.Deportament());
 
-                for (int y = new Random().Next(1,10); y >= deportaments[i].Staffs.Count;)
+                for (int ranStafCount = new Random().Next(1,10); ranStafCount >= deportaments[i].Staffs.Count;)
                 {
-                    deportaments[i].AddStaff(new DataModel.Intern(deportaments[i]));
+                    int ranStafType = new Random().Next(1, 3);
+                    switch (ranStafType)
+                    {
+                        case 1:
+                            deportaments[i].AddStaff(new DataModel.Managers(deportaments[i]));
+                            break;
+                        case 2:
+                            deportaments[i].AddStaff(new DataModel.Personal(deportaments[i]));
+                            break;
+                        case 3:
+                            deportaments[i].AddStaff(new DataModel.Intern(deportaments[i]));
+                            break;
+                    }
                 }
                 int rand = new Random().Next(1, 100);
                 if (rand > 85)

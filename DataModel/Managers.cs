@@ -11,7 +11,7 @@ namespace WpfApp1.DataModel
         {
             get
             {
-                double resoult = 1300;  //По условию минимум 1300
+                double resoult = 0;  
                 if ((Deportament.Staffs == null && Deportament.Deportaments == null) ||
                     (Deportament.Staffs.Count <= 0 && Deportament.Deportaments.Count <= 0))
                     return resoult;
@@ -19,7 +19,7 @@ namespace WpfApp1.DataModel
                 {
                     foreach (var staff in Deportament.Staffs)
                     {
-                        if (staff is Managers)
+                        if (staff is Managers) //TO-DO: переписать на сравнение с текущий экземпляром.
                             continue;
                         resoult += ((Staff)staff).Salary;
                     }
@@ -32,14 +32,17 @@ namespace WpfApp1.DataModel
                         resoult += dep.AllSalary;
                     }
                 }
-                if (resoult * 0.15 > 1300) resoult = resoult * 0.15;  //Если 15% от всех зарплат больше 1300, то заменяем результат.
+                if (resoult * 0.15 > 1300) resoult = resoult * 0.15;  //Если 15% от всех зарплат больше 1300, то возвращаем.
+                else resoult = 1300;  //Иначе передаем минимальную оплату.
                 return resoult;      //возвараем оплату за месяц.
             }
         }
 
-        public Managers(Deportament deportament,bool IsManager) : base(deportament) 
+        public Managers(Deportament deportament) : base(deportament) 
         {
-            this.Deportament.ThereManager = true;  //Делаем так что в каждом депортаменте только 1 менеджер.
+            //this.Deportament.ThereManager = true;  //Делаем так что в каждом депортаменте только 1 менеджер.
+            this.FirstName = "Manager";
+            this.LastName = ID.ToString();
         }
 
         public override string GetName()

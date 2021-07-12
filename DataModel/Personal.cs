@@ -18,6 +18,8 @@ namespace WpfApp1.DataModel
         public Personal(Deportament deportament, byte Hours = 8) : base(deportament)
         {
             JobHours = Hours;
+            this.FirstName = "Personal";
+            this.LastName = ID.ToString();
         }
     }
 }

@@ -51,7 +51,6 @@ namespace WpfApp1.DataModel
             }
         }                    //Возвращаем общие запраты по депортаменту и дочерним депортаментам.
         public Deportament ParentDeportament { get; set; }
-        public bool ThereManager { get; set; }  //Делаем так что в каждом депортаменте только 1 менеджер.
 
 
         public Deportament(Deportament parentDeportament = null)
@@ -62,7 +61,6 @@ namespace WpfApp1.DataModel
             Deportaments = new ObservableCollection<Deportament>();
             Staffs = new ObservableCollection<Staff>();
             this.ParentDeportament = parentDeportament;
-            ThereManager = false;
         }
 
         /// <summary>
@@ -71,7 +69,7 @@ namespace WpfApp1.DataModel
         /// <param name="staff">Передать обьект для добовления</param>
         public void AddStaff(Staff staff) {
             if (Staffs == null) Staffs = new ObservableCollection<Staff>();      //Если коллекция не создана, создаем ее.
-            if (staff is Managers && ThereManager) throw new Exception("Уже есть начальник депортамента");
+
             Staffs.Add(staff);
         }
 
@@ -82,7 +80,6 @@ namespace WpfApp1.DataModel
         public void RemoveStaff(Staff staff) {
             if (Staffs == null || Staffs.Count <= 0) return;      //Если коллекция пуста, выходим из метода.
             Staffs.Remove(staff);
-            if (staff is Managers) ThereManager = false;
         }
 
         /// <summary>
@@ -91,9 +88,6 @@ namespace WpfApp1.DataModel
         /// <param name="changedStaff">Измененный сотрудник</param>
         /// <param name="targetStaff">Изменяемый сотрудник</param>
         public void ChangeStaff(Staff changedStaff,Staff targetStaff) {
-            if (!(targetStaff is Managers) && (changedStaff is Managers) && ThereManager) throw new Exception("Не может быть более 1 начальника.");
-            if (targetStaff is Managers && !(changedStaff is Managers)) ThereManager = false;
-            if (!(targetStaff is Managers) && (changedStaff is Managers) && !ThereManager) ThereManager = true;
             targetStaff = changedStaff;
         }
 
