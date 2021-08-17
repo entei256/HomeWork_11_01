@@ -25,7 +25,7 @@ namespace WpfApp1
 
                 for (int ranStafCount = new Random().Next(1,10); ranStafCount >= deportaments[i].Staffs.Count;)
                 {
-                    int ranStafType = new Random().Next(1, 3);
+                    int ranStafType = new Random().Next(1, 4);
                     switch (ranStafType)
                     {
                         case 1:

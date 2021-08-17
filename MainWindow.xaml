@@ -23,8 +23,14 @@
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0">
             <Menu>
                 <MenuItem Header="Файл">
-                    <MenuItem Header="Сохранить"/>
-                    <MenuItem Header="Открыть"/>
+                    <MenuItem Header="Сохранить">
+                        <MenuItem Header="XML"/>
+                        <MenuItem Header="JSON"/>
+                    </MenuItem>
+                    <MenuItem Header="Открыть">
+                        <MenuItem Header="XML"/>
+                        <MenuItem Header="JSON"/>
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem Header="Депортамент">
                     <MenuItem Header="Добавить"/>
