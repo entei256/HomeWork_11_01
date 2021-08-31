@@ -35,7 +35,6 @@
                 <MenuItem Header="Депортамент">
                     <MenuItem Header="Добавить"/>
                     <MenuItem Header="Удалить"/>
-                    <MenuItem Header="Редактировать"/>
                 </MenuItem>
                 <MenuItem Header="Сотрудники">
                     <MenuItem Header="Добавить"/>

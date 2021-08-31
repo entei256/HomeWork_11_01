@@ -6,7 +6,7 @@ namespace WpfApp1.DataModel
 {
     class Personal : Staff
     {
-        public byte JobHours { get; private set; }
+        public byte JobHours { get; set; }
         override public double Salary 
         { 
             get 

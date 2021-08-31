@@ -3,18 +3,25 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
+using System.Windows.Input;
 
 namespace WpfApp1
 {
     class VM
     {
+        //Основная коллекция
         public ObservableCollection<DataModel.Deportament> Deportaments { get; set; } = new ObservableCollection<DataModel.Deportament>();
 
-
+        //Конструктор
         public VM()
         {
             testData(Deportaments);
         }
+
+        #region Комманды UI
+        private BingCommand addStaff;
+
+        #endregion
 
         private void testData(ObservableCollection<DataModel.Deportament> deportaments)
         {
@@ -44,6 +51,41 @@ namespace WpfApp1
                     testData(deportaments[i].Deportaments);
             }
             
+        }
+    }
+
+    //Класс для реализации комманд
+    public class BingCommand : ICommand
+    {
+        private Action<object> execute;  
+        private Func<object, bool> canExecute; 
+
+        //Конструктор
+        public BingCommand(Action<object> execute, Func<object, bool> canExecute = null)
+        {
+            this.execute = execute;
+            this.canExecute = canExecute;
+        }
+
+
+        //Событие изменения команды.
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+
+
+        //Определение надо выполнять комманду или нет.
+        public bool CanExecute(object parameter)
+        {
+            return this.canExecute == null || this.canExecute(parameter);
+        }
+
+        //Выполнение комманды
+        public void Execute(object parameter)
+        {
+            this.execute(parameter);
         }
     }
 }
