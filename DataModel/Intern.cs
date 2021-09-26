@@ -15,7 +15,7 @@ namespace WpfApp1.DataModel
         }
 
         //Не нашел другого выхода кроме как сделать такую заглушку для конструктора
-        public Intern(Deportament deportament) : base(deportament) {
+        public Intern(Deportament deportament) : base(deportament,StaffTypes.Intern) {
             this.FirstName = "Intern";
             this.LastName = ID.ToString();
         }

@@ -31,7 +31,7 @@ namespace WpfApp1.DataModel
                 double resoult = 0;
                 if ((Staffs == null && Deportaments == null) || (Staffs.Count <= 0 && Deportaments.Count <= 0))
                     return 0;
-                if (Staffs != null || Staffs.Count >= 0)
+                if (Staffs != null || Staffs.Count > 0)
                 {
                     foreach (var staff in Staffs)
                     {
@@ -39,7 +39,7 @@ namespace WpfApp1.DataModel
                     }
                 }
 
-                if (Deportaments != null || Deportaments.Count >= 0)
+                if (Deportaments != null || Deportaments.Count > 0)
                 {
                     foreach (var dep in Deportaments)
                     {
@@ -79,6 +79,9 @@ namespace WpfApp1.DataModel
         /// <param name="staff">Передать какого сотрудника удалить.</param>
         public void RemoveStaff(Staff staff) {
             if (Staffs == null || Staffs.Count <= 0) return;      //Если коллекция пуста, выходим из метода.
+
+
+
             Staffs.Remove(staff);
         }
 

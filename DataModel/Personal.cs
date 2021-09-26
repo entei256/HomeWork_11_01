@@ -15,7 +15,7 @@ namespace WpfApp1.DataModel
             } 
         }
 
-        public Personal(Deportament deportament, byte Hours = 8) : base(deportament)
+        public Personal(Deportament deportament, byte Hours = 8) : base(deportament, StaffTypes.Personal)
         {
             JobHours = Hours;
             this.FirstName = "Personal";

@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:WpfApp1"
+        xmlns:Behaviours ="clr-namespace:WpfApp1.Behaviors"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
@@ -37,7 +39,7 @@
                     <MenuItem Header="Удалить"/>
                 </MenuItem>
                 <MenuItem Header="Сотрудники">
-                    <MenuItem Header="Добавить"/>
+                    <MenuItem Header="Добавить" Command="{Binding AddStaff}"/>
                     <MenuItem Header="Удалить"/>
                     <MenuItem Header="Редактировать"/>
                 </MenuItem>
@@ -47,31 +49,34 @@
 
         <!--#region Часть данных-->
         <TreeView x:Name="treeView" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Deportaments}">
+            <i:Interaction.Behaviors>
+                <Behaviours:TreeViewBehaviors TreeSelectedItem="{Binding selectedDeportament,Mode=TwoWay}"/>
+            </i:Interaction.Behaviors>
             <TreeView.ItemTemplate>
-            <HierarchicalDataTemplate ItemsSource="{Binding Deportaments}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0">
+                <HierarchicalDataTemplate ItemsSource="{Binding Deportaments}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0">
                             <Run Text="ID:"/>
                             <Run Text="{Binding ID}"/>
-                    </TextBlock>
-                    <TextBlock Grid.Row="0" Grid.Column="1">
+                        </TextBlock>
+                        <TextBlock Grid.Row="0" Grid.Column="1">
                             <Run Text=" Название:"/>
                             <Run Text="{Binding Name}"/>
-                    </TextBlock>
-                    <TextBlock Grid.Row="1" Grid.ColumnSpan="2">
+                        </TextBlock>
+                        <TextBlock Grid.Row="1" Grid.ColumnSpan="2">
                             <Run Text="Дата:"/>
                             <Run Text="{Binding DateTime,StringFormat={}{0:dd.MM.yyyy}}"/>
-                    </TextBlock>
-                </Grid>
-            </HierarchicalDataTemplate>
+                        </TextBlock>
+                    </Grid>
+                </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
         <DataGrid x:Name="dataGrid" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding ElementName=treeView, Path=SelectedItem.Staffs}" AutoGenerateColumns="False">

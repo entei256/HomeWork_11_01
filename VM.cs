@@ -12,6 +12,8 @@ namespace WpfApp1
         //Основная коллекция
         public ObservableCollection<DataModel.Deportament> Deportaments { get; set; } = new ObservableCollection<DataModel.Deportament>();
 
+        public DataModel.Deportament selectedDeportament { get; set; } = null;
+
         //Конструктор
         public VM()
         {
@@ -19,9 +21,24 @@ namespace WpfApp1
         }
 
         #region Комманды UI
-        private BingCommand addStaff;
+        private BindCommand addStaff;
+
+        public BindCommand AddStaff
+        {
+            get {
+                var newStaff = new AddOrChangeStaff();
+                newStaff.Show();
+                if (addStaff != null)
+                    return addStaff;
+                addStaff = new BindCommand(() => selectedDeportament.AddStaff(new DataModel.Personal(selectedDeportament)));
+                return addStaff;
+            }
+        }
+
 
         #endregion
+
+
 
         private void testData(ObservableCollection<DataModel.Deportament> deportaments)
         {
@@ -54,18 +71,29 @@ namespace WpfApp1
         }
     }
 
+ 
+
     //Класс для реализации комманд
-    public class BingCommand : ICommand
+    public class BindCommand : ICommand
     {
-        private Action<object> execute;  
+        private Action execute;
+        private Action<object> executeParam;  
         private Func<object, bool> canExecute; 
 
+        //Конструктор с параметром
+        public BindCommand(Action<object> execute, Func<object, bool> canExecute = null)
+        {
+            this.executeParam = execute;
+            this.canExecute = canExecute;
+        }
+
         //Конструктор
-        public BingCommand(Action<object> execute, Func<object, bool> canExecute = null)
+        public BindCommand(Action execute, Func<object, bool> canExecute = null)
         {
             this.execute = execute;
             this.canExecute = canExecute;
         }
+
 
 
         //Событие изменения команды.
@@ -83,9 +111,17 @@ namespace WpfApp1
         }
 
         //Выполнение комманды
-        public void Execute(object parameter)
+        public void Execute(object parameter = null)
         {
-            this.execute(parameter);
+            if (parameter != null)
+            {
+                this.executeParam(parameter);
+                return;
+            }
+            this.execute();
+            
         }
+
+        
     }
 }
